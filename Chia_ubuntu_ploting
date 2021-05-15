@@ -1,0 +1,49 @@
+####Chia_ubuntu_ploting
+
+1. Install python 3.8
+#sudo apt-get install python3.8-venv python3.8-distutils python3.8-dev git lsb-release -y
+2. get the software 
+#git clone https://github.com/Chia-Network/chia-blockchain.git -b latest --recurse-submodules
+3. install chia
+#cd chia-blockchain
+#sh install.sh
+4. get into the enviroment
+#. ./activate
+5. initialise chia
+#chia init
+6. generate the keys (write your keys on papier)
+#chia keys generate
+7. start chia farmer and wallet
+#chia start node farmer wallet
+8. create plots
+#chia plots create -k 32 -8000 -u 128 -r 4 -t /temp_plot -d /final_plot -n 1
+
+k32 - type of plot
+-8000 - memory allocation
+-u 128 - simuntanieus files
+-r 4 - number of threads (cores of cpu)
+-t - temp directory
+-d - final directory
+-n - number of plots to create
+=====
+show node status
+#chia show -s 
+
+use screen to start ploting
+
+install screen 
+#apt install screen
+
+start screen for ploting
+screen -S ploting
+
+to exit screen we need
+CTRL A D
+
+list running screens
+screen -ls
+
+resume a screen
+screen -r ploting 
+
+
