@@ -19,7 +19,7 @@
 #chia plots create -k 32 -b 8000 -u 128 -r 4 -t /temp_plot -d /final_plot -n 1
 
 k32 - type of plot
--8000 - memory allocation
+-b 8000 - memory allocation
 -u 128 - simuntanieus files
 -r 4 - number of threads (cores of cpu)
 -t - temp directory
