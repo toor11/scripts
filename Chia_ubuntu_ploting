@@ -16,7 +16,7 @@
 7. start chia farmer and wallet
 #chia start node farmer wallet
 8. create plots
-#chia plots create -k 32 -8000 -u 128 -r 4 -t /temp_plot -d /final_plot -n 1
+#chia plots create -k 32 -b 8000 -u 128 -r 4 -t /temp_plot -d /final_plot -n 1
 
 k32 - type of plot
 -8000 - memory allocation
