@@ -28,6 +28,8 @@ k32 - type of plot
 =====
 show node status
 #chia show -s 
+show farm status
+#chia farm summary
 
 use screen to start ploting
 
