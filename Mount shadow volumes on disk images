@@ -1,0 +1,25 @@
+Mounting the Shadow Volume
+To work with the Shadow Volumes we will use the VSSAdmin tool bundled with Windows 7 Ultimate and Professional editions.
+
+Start by opening an Administrator enabled command shell. This can be done by right clicking on the Command Prompt application in Start > Accessories > Command Prompt and selecting "Run As Administrator".
+Once the command prompt is open you can view the available Shadow Volumes by typing: "vssadmin list shadows".
+C:\> vssadmin list shadows
+
+At this point you may see a long list of Shadow Volumes that were
+created both by the machine the disk image is from as well as local shadow volumes. To list just the Shadow Volumes associated with the drive image you can add an optional /FOR=<DriveLetter:\> where DriveLetter is the drive letter that the drive image is mounted on.
+
+C:\> vssadmin list shadows /for=E:\
+
+
+vssadmin list
+Now that we have a list of the Shadow Volumes we can mount them using the mklink tool. To do this, on the command line type:
+"mklink /D C:\<some directory> \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy#\"
+
+Where <some directory> is the path that you'd like the mount the Shadow Volume at, and the # in HarddiskVolumeShadowCopy is the number o the Shadow Volume to mount. Please note that the trailing slash is absoutely necessary. Without the slash you will receive a permissions error when trying to access the directory.
+
+mklink /D C:\shadow_volume_1 \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
+
+If all was successful you should receive a message that looks like this:
+symbolic link created for <some directory> <<===>> \\?GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
+
+You can now browse the files contained in the Shadow Volume just like any other files in your file system!
