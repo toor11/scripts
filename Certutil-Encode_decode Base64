@@ -1,0 +1,51 @@
+For the impatient:
+
+certutil -encode infile outfile
+certutil -decode b64_encoded outfile
+
+findstr /v CERTIFICATE outfile > removed_headers
+Here is an example of using certutil to decode a file:
+
+C:\Users\vagrant>echo aGVsbG8K >hello.txt
+
+C:\Users\vagrant>certutil -decode hello.txt out.txt
+Input Length = 11
+Output Length = 6
+CertUtil: -decode command completed successfully.
+
+C:\Users\vagrant>type out.txt
+hello
+Encoding is similar, but adds a header and a footer to the output file:
+
+C:\Users\vagrant>type out.txt
+hello
+
+C:\Users\vagrant>certutil -encode out.txt hello2.txt
+Input Length = 6
+Output Length = 66
+CertUtil: -encode command completed successfully.
+
+C:\Users\vagrant>type hello2.txt
+-----BEGIN CERTIFICATE-----
+aGVsbG8K
+-----END CERTIFICATE-----
+The header and footer can be stripped with findstr:
+
+C:\Users\vagrant>findstr /v CERTIFICATE hello2.txt >removed-headers.txt
+
+C:\Users\vagrant>type removed-headers.txt
+aGVsbG8K
+Original Post
+I ran into a scenario where I was able to upload ASCII files, but executable files were being saved improperly. A common workaround for this is to use base64 to encode the executable, transfer the encoded data, then decode it on the recipient machine.
+
+The version of Windows I was using did not have base64 or uuencode. I was able to use “certutil” to decode my base64 encoded executable:
+
+certutil Documentation from Microsoft Technet
+
+The -encode and -decode flags do exactly what I wanted. I transferred my file as foo.asc and decoded it like so:
+
+certutil -decode c:\foo.asc c:\foo.exe
+Encoding a file on Windows would work the same way:
+
+certutil -encode c:\foo.exe c:\foo.asc
+It worked! foo.exe matches the md5sum of the executable I initially encoded and runs as intended!
